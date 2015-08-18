@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<project name="Trading System" default="build" basedir="." xmlns="http://nant.sf.net/release/0.92/nant.xsd">
+
+  <property name="IsBuildServer" value="false"/>
+  <property name="BuildConfiguration" value="Release"/>
+  <property name="MSTest" value="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\mstest.exe"/>
+
+  <!--==============================================-->
+  <!-- Main targets -->
+  <!--==============================================-->
+  
+  <!-- Build the solution -->
+  <target name="build">
+    
+    <msbuild project="CIDemo.sln">
+      <arg value="/p:Configuration=${BuildConfiguration}" />
+      <arg value="/p:Platform=Any CPU" />
+      <arg value="/t:Rebuild" />
+    </msbuild>
+  </target>
+
+  <!-- Run all unit tests -->
+  <target name="test" depends="build">
+    <!-- Delete the test results directory -->
+    <delete dir="TestResults"/>
+
+    <!-- For each test project (except those that are excluded) run all unit tests -->
+    <foreach item="Folder" property="foldername">
+      <in>
+        <items>
+          <include name="*.Tests" />
+        </items>
+      </in>
+      <do>
+        <property name="dllName" value="${foldername}/bin/${BuildConfiguration}/${path::get-file-name(foldername)}.dll"/>
+
+        <!-- Fail if testing dll does not exist -->
+        <fail unless="${file::exists(dllName)}" message="Could not find DLL with unit tests: ${dllName}"/>
+
+        <!-- Run MSTest -->
+		<trycatch>
+			<try>
+				<exec program="${MSTest}">
+				  <arg value="/testcontainer:${dllName}"/>
+				  <arg value="/category:!INTEGRATION"/>
+				</exec>
+			</try>
+			<catch property="failure">
+				<echo message="Retrying failed tests"/>
+				<exec program="${MSTest}">
+					<arg value="/testcontainer:${dllName}"/>
+					<arg value="/category:!INTEGRATION"/>
+				</exec>
+			</catch>
+		</trycatch>
+    
+      </do>
+    </foreach>
+  </target>
+
+  <!-- Run code coverage on unit tests -->
+  <target name="codeCoverage"  depends="build">
+    <property name="openCover" value="packages\OpenCover.4.6.166\tools\OpenCover.Console.exe"/>
+    
+    <delete dir="codecoverage"/>
+    
+    <mkdir dir="codecoverage"/>
+
+    <exec program="${openCover}">
+      <arg value="-register:user"/>
+      <arg value="-target:${MSTest}"/>
+      <arg value="-targetargs:/testcontainer:CIDemo.Business.Tests\bin\${BuildConfiguration}\CIDemo.Business.Tests.dll"/>
+      <arg value="-output:codecoverage/CIDemo.Business.Results.xml"/>
+      <!--<arg value="-filter:+[CIDemo.Business.xyz]*"/>-->
+    </exec>
+
+    <!-- Create the report from the results -->
+    <exec program="packages\ReportGenerator.2.1.8.0\tools\ReportGenerator.exe">
+      <arg value="-reports:codecoverage/*Results.xml"/>
+      <arg value="-targetdir:codecoverage/"/>
+    </exec>
+
+    <!-- Launch the report unless we are on the build server -->
+    <exec program="${environment::get-variable('ProgramFiles(x86)')}\Google\Chrome\Application\chrome.exe" unless="${IsBuildServer}">
+      <arg value="${directory::get-current-directory()}\codecoverage\index.htm"/>
+    </exec>
+    
+  </target>
+
+</project>
