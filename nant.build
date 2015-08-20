@@ -25,6 +25,7 @@
       <arg value="/p:Configuration=${BuildConfiguration}" />
       <arg value="/p:Platform=Any CPU" />
       <arg value="/t:Rebuild" />
+      <arg value="/p:VisualStudioVersion=12.0"/>
     </msbuild>
     
   </target>
