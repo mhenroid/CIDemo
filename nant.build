@@ -99,4 +99,31 @@
     
   </target>
 
+  <target name="package">
+    <delete dir="deploy" failonerror="false"></delete>
+    <mkdir dir="deploy"></mkdir>
+    
+    <msbuild project="CIDemo.Web\CIDemo.Web.csproj">
+      <arg value="/p:Configuration=${BuildConfiguration}" />
+      <arg value="/t:Package" />
+      <arg value="/p:VisualStudioVersion=12.0"/>
+    </msbuild>
+
+    <copy todir="deploy" overwrite="true">
+      <fileset basedir="CIDemo.Web\obj\Release\Package">
+        <include name="*.zip"/>
+        <include name="*.cmd"/>
+        <include name="*.SetParameters.xml" />
+        <include name="*.SourceManifest.xml" />
+      </fileset>
+    </copy>
+    
+  </target>
+    
+  <target name="deployDev">
+    <property name="deploy.sourcePath" value="\\cidemoserver\c$\build\CIDemo\package" />
+    <property name="deploy.targetPath" value="\\cidemoserver\c$\sandbox\CIDemo"/>
+  </target>
+
+  
 </project>
