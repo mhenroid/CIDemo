@@ -123,6 +123,13 @@
   <target name="deployDev">
     <property name="deploy.sourcePath" value="\\cidemoserver\c$\build\CIDemo\package" />
     <property name="deploy.targetPath" value="\\cidemoserver\c$\sandbox\CIDemo"/>
+
+    <msbuild project="CIDemo.Web\CIDemo.Web.csproj">
+      <arg value="/p:DeployOnBuild=true" />
+      <arg value="/p:PublishProfile=DEV" />
+      <arg value="/p:VisualStudioVersion=12.0"/>
+    </msbuild>
+    
   </target>
 
   
