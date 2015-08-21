@@ -6,14 +6,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CIDemo.Business.Tests
 {
     [TestClass]
-    public class FastDoublingFibonacciStrategyTests
+    public class FibonacciCalculatorTests
     {
-        private IFibonacciStrategy target;
+        private IFibonacciCalculator target;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            target = new FastDoublingFibonacciStrategy();
+            target = new FibonacciCalculator();
         }
 
         [TestMethod]
@@ -98,25 +98,6 @@ namespace CIDemo.Business.Tests
 
             // Assert
             Assert.AreEqual("139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125", result);
-        }
-
-        [TestMethod]
-        public void xyzTest()
-        {
-            // Setup
-
-            // Act
-            var target1 = new FastDoublingFibonacciStrategy();
-            var target2 = new IterativeFibonacciStrategy();
-            for (int i = 0; i < 100000; i++)
-            {
-                Debug.WriteLine("Working on: " + i.ToString());
-                var result1 = target1.GetNthValue(i);
-                var result2 = target2.GetNthValue(i);
-                Assert.AreEqual(result1, result2);
-            }
-            // Assert
-
         }
     }
 }

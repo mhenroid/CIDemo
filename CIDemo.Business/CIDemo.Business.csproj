@@ -40,9 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FastDoublingFibonacciStrategy.cs" />
-    <Compile Include="IFibonacciStrategy.cs" />
-    <Compile Include="IterativeFibonacciStrategy.cs" />
+    <Compile Include="FibonacciCalculator.cs" />
+    <Compile Include="IFibonacciCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

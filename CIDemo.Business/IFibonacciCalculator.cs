@@ -2,7 +2,7 @@
 
 namespace CIDemo.Business
 {
-    public interface IFibonacciStrategy
+    public interface IFibonacciCalculator
     {
         string GetNthValue(int n);
     }

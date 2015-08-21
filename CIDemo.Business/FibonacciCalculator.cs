@@ -2,7 +2,7 @@
 
 namespace CIDemo.Business
 {
-    public class FastDoublingFibonacciStrategy : IFibonacciStrategy
+    public class FibonacciCalculator : IFibonacciCalculator
     {
         public string GetNthValue(int n)
         {
