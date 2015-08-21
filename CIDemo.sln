@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DCC4AD
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIDemo.SpecFlow.Tests", "CIDemo.SpecFlow.Tests\CIDemo.SpecFlow.Tests.csproj", "{DE847488-1933-451D-A325-3A75B44EAE4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{8D4C5D9F-ABA5-4AF2-A410-55C67A954B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D4C5D9F-ABA5-4AF2-A410-55C67A954B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D4C5D9F-ABA5-4AF2-A410-55C67A954B99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE847488-1933-451D-A325-3A75B44EAE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE847488-1933-451D-A325-3A75B44EAE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE847488-1933-451D-A325-3A75B44EAE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE847488-1933-451D-A325-3A75B44EAE4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{69AFCD99-4818-4718-A5C8-60C526A1C719} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
 		{3F107075-31D4-4CF1-A41A-0EE624102CFA} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
 		{0A3562F7-0853-4F20-9D90-DF396C1EB8C7} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
+		{DE847488-1933-451D-A325-3A75B44EAE4D} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
 	EndGlobalSection
 EndGlobal
