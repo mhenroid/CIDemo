@@ -58,6 +58,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FibonacciCalculations.feature</DependentUpon>
     </Compile>
+    <Compile Include="FibonacciCalculationsSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,12 @@
       <LastGenOutput>FibonacciCalculations.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CIDemo.Business\CIDemo.Business.csproj">
+      <Project>{5ab059a4-7b81-46b3-b1fa-fd27a7025025}</Project>
+      <Name>CIDemo.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
