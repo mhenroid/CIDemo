@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
 <project name="CIDemo" default="build" basedir="." xmlns="http://nant.sf.net/release/0.92/nant.xsd">
 
+  <!-- This property should be set to true on the build server to change the flow of certain targets-->
   <property name="IsBuildServer" value="false"/>
+  
+  <!-- The build configuration used by MSBuild -->
   <property name="BuildConfiguration" value="Release"/>
-  <property name="MSTest" value="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\mstest.exe"/>
-
+  
+  <!-- Paths to various tools-->
+  <property name="MSTestExe" value="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\mstest.exe"/>
+  <property name="OpenCoverExe" value="packages\OpenCover.4.6.166\tools\OpenCover.Console.exe"/>
+  
   <!--==============================================-->
   <!-- Main targets -->
   <!--==============================================-->
@@ -52,14 +58,14 @@
         <!-- Run MSTest -->
 		<trycatch>
 			<try>
-				<exec program="${MSTest}">
+				<exec program="${MSTestExe}">
 				  <arg value="/testcontainer:${dllName}"/>
 				  <arg value="/category:!INTEGRATION"/>
 				</exec>
 			</try>
 			<catch property="failure">
 				<echo message="Retrying failed tests"/>
-				<exec program="${MSTest}">
+				<exec program="${MSTestExe}">
 					<arg value="/testcontainer:${dllName}"/>
 					<arg value="/category:!INTEGRATION"/>
 				</exec>
@@ -71,21 +77,37 @@
   </target>
 
   <!-- Run code coverage on unit tests -->
-  <target name="codeCoverage"  depends="build">
-    <property name="openCover" value="packages\OpenCover.4.6.166\tools\OpenCover.Console.exe"/>
+  <target name="codeCoverage">
     
+    <!-- Rebuild codecoverage directory -->
     <delete dir="codecoverage"/>
-    
     <mkdir dir="codecoverage"/>
 
-    <exec program="${openCover}">
-      <arg value="-register:user"/>
-      <arg value="-target:${MSTest}"/>
-      <arg value="-targetargs:/testcontainer:CIDemo.Business.Tests\bin\${BuildConfiguration}\CIDemo.Business.Tests.dll"/>
-      <arg value="-output:codecoverage/CIDemo.Business.Results.xml"/>
-      <!--<arg value="-filter:+[CIDemo.Business.xyz]*"/>-->
-    </exec>
+    <foreach item="Folder" property="foldername">
+      <in>
+        <items>
+          <include name="*.Tests" />
+        </items>
+      </in>
+      <do>
+        <property name="dllName" value="${foldername}/bin/${BuildConfiguration}/${path::get-file-name(foldername)}.dll"/>
+        <property name="projectName" value="${path::get-file-name(foldername)}"/>
 
+        <!-- Fail if testing dll does not exist -->
+        <fail unless="${file::exists(dllName)}" message="Could not find DLL with unit tests: ${dllName}"/>
+
+        <!-- Run code coverage -->
+        <exec program="${OpenCoverExe}">
+          <arg value="-register:user"/>
+          <arg value="-target:${MSTestExe}"/>
+          <arg value="-targetargs:/testcontainer:${dllName}"/>
+          <arg value="-output:codecoverage/${projectName}.Results.xml"/>
+          <arg value="-filter:+[CIDemo.*]*" />
+          <arg value="-filter:-[CIDemo.*.Tests]*" />
+        </exec>
+      </do>
+    </foreach>
+    
     <!-- Create the report from the results -->
     <exec program="packages\ReportGenerator.2.1.8.0\tools\ReportGenerator.exe">
       <arg value="-reports:codecoverage/*Results.xml"/>
@@ -119,7 +141,8 @@
     </copy>
     
   </target>
-    
+  
+  <!-- Deploy to the dev environment -->
   <target name="deployDev">
     <property name="deploy.sourcePath" value="\\cidemoserver\c$\build\CIDemo\package" />
     <property name="deploy.targetPath" value="\\cidemoserver\c$\sandbox\CIDemo"/>
