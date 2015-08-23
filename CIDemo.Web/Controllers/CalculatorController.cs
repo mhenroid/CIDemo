@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CIDemo.Business;
 using CIDemo.Web.Models;
 
 namespace CIDemo.Web.Controllers
 {
     public class CalculatorController : Controller
     {
+        private readonly IFibonacciCalculator calculator;
+
+        public CalculatorController(IFibonacciCalculator calculator)
+        {
+            this.calculator = calculator;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -20,7 +28,22 @@ namespace CIDemo.Web.Controllers
         [HttpPost]
         public ActionResult Index(CalculatorViewModel viewModel)
         {
-            viewModel.Result = "Test 123";
+            if (!ModelState.IsValid)
+            {
+                viewModel.Result = string.Empty;
+            }
+            else
+            {
+                try
+                {
+                    viewModel.Result = this.calculator.GetNthValue(viewModel.N);
+                }
+                catch
+                {
+                    ModelState.AddModelError("Global", "An unexpected error occurred");
+                }
+            }
+
             return View(viewModel);
         }
     }
