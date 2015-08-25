@@ -17,7 +17,6 @@ namespace CIDemo.Web.Automation.Tests
         }
 
         [TestMethod]
-        [TestCategory("UIAutomation")]
         public void GetFibonacci_ForN500_Test()
         {
             // Setup
