@@ -60,14 +60,14 @@
 			<try>
 				<exec program="${MSTestExe}">
 				  <arg value="/testcontainer:${dllName}"/>
-				  <arg value="/category:!INTEGRATION"/>
+				  <arg value="/category:!UIAutomation"/>
 				</exec>
 			</try>
 			<catch property="failure">
 				<echo message="Retrying failed tests"/>
 				<exec program="${MSTestExe}">
 					<arg value="/testcontainer:${dllName}"/>
-					<arg value="/category:!INTEGRATION"/>
+					<arg value="/category:!UIAutomation"/>
 				</exec>
 			</catch>
 		</trycatch>
@@ -77,7 +77,7 @@
   </target>
 
   <!-- Run code coverage on unit tests -->
-  <target name="codeCoverage">
+  <target name="codeCoverage" depends="build">
     
     <!-- Rebuild codecoverage directory -->
     <delete dir="codecoverage"/>
@@ -155,5 +155,4 @@
     
   </target>
 
-  
 </project>

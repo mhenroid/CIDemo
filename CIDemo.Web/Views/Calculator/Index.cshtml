@@ -14,10 +14,10 @@
         <label>n=</label>
         <input type="number" name="@Html.NameFor(o => o.N)" value="@Model.N"/>
         <br /><br />
-        <input type="submit" class="btn btn-primary" value="Calculate" />
+        <input id="submitButton" type="submit" class="btn btn-primary" value="Calculate" />
     </div>
     <div class="form-group">
         <label>Result</label>
-        <textarea rows="5" class="form-control" name="@Html.NameFor(o => o.Result)">@Model.Result</textarea>
+        <textarea id="result" rows="5" class="form-control" name="@Html.NameFor(o => o.Result)">@Model.Result</textarea>
     </div>
 }

@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DCC4AD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIDemo.SpecFlow.Tests", "CIDemo.SpecFlow.Tests\CIDemo.SpecFlow.Tests.csproj", "{DE847488-1933-451D-A325-3A75B44EAE4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIDemo.Web.Automation.Tests", "CIDemo.Web.Automation.Tests\CIDemo.Web.Automation.Tests.csproj", "{7D404C7A-DDA5-49D7-A78C-A3256EDA80DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{DE847488-1933-451D-A325-3A75B44EAE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE847488-1933-451D-A325-3A75B44EAE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE847488-1933-451D-A325-3A75B44EAE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D404C7A-DDA5-49D7-A78C-A3256EDA80DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D404C7A-DDA5-49D7-A78C-A3256EDA80DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D404C7A-DDA5-49D7-A78C-A3256EDA80DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D404C7A-DDA5-49D7-A78C-A3256EDA80DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,5 +100,6 @@ Global
 		{3F107075-31D4-4CF1-A41A-0EE624102CFA} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
 		{0A3562F7-0853-4F20-9D90-DF396C1EB8C7} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
 		{DE847488-1933-451D-A325-3A75B44EAE4D} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
+		{7D404C7A-DDA5-49D7-A78C-A3256EDA80DC} = {A52FC780-919E-4749-8ACF-4BBD95D13D7B}
 	EndGlobalSection
 EndGlobal
