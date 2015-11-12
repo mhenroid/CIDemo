@@ -37,7 +37,7 @@
   </target>
   
   <!-- Run all unit tests -->
-  <target name="test" depends="build">
+  <target name="test">
     
     <!-- Delete the test results directory -->
     <delete dir="TestResults"/>
@@ -51,28 +51,20 @@
         </items>
       </in>
       <do>
+        <!-- Set the path to the test project dll that contains the tests-->
         <property name="dllName" value="${foldername}/bin/${BuildConfiguration}/${path::get-file-name(foldername)}.dll"/>
 
         <!-- Fail if testing dll does not exist -->
         <fail unless="${file::exists(dllName)}" message="Could not find DLL with unit tests: ${dllName}"/>
 
-        <!-- Run MSTest -->
-		<trycatch>
-			<try>
-				<exec program="${MSTestExe}">
-				  <arg value="/testcontainer:${dllName}"/>
-				</exec>
-			</try>
-			<catch property="failure">
-				<echo message="Retrying failed tests"/>
-				<exec program="${MSTestExe}">
-					<arg value="/testcontainer:${dllName}"/>
-				</exec>
-			</catch>
-		</trycatch>
-    
+        <!-- Run unit tests for current project -->
+        <exec program="${MSTestExe}">
+          <arg value="/testcontainer:${dllName}"/>
+        </exec>
+        
       </do>
     </foreach>
+    
   </target>
 
   <!-- Run code coverage on unit tests -->

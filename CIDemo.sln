@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A52FC780
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{20139C1B-F722-4A54-AC2B-593AF42B3974}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		Build\ccnet.config = Build\ccnet.config
 		nant.build = nant.build
 	EndProjectSection
