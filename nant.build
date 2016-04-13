@@ -8,7 +8,8 @@
   <property name="BuildConfiguration" value="Release"/>
   
   <!-- Paths to various tools-->
-  <property name="MSTestExe" value="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\mstest.exe"/>
+  <property name="MSBuild" value="C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe"/>
+  <property name="MSTestExe" value="C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe"/>
   <property name="OpenCoverExe" value="packages\OpenCover.4.6.166\tools\OpenCover.Console.exe"/>
   
   <!--==============================================-->
@@ -27,12 +28,12 @@
   <!-- Build the solution -->
   <target name="build" depends="packageRestore">
     
-    <msbuild project="CIDemo.sln">
+    <exec program="${MSBuild}">
       <arg value="/p:Configuration=${BuildConfiguration}" />
       <arg value="/p:Platform=Any CPU" />
       <arg value="/t:Rebuild" />
-      <arg value="/p:VisualStudioVersion=12.0"/>
-    </msbuild>
+      <arg value="CIDemo.sln" />
+    </exec>
     
   </target>
   
@@ -117,11 +118,11 @@
     <delete dir="deploy" failonerror="false"></delete>
     <mkdir dir="deploy"></mkdir>
     
-    <msbuild project="CIDemo.Web\CIDemo.Web.csproj">
+	<exec program="${MSBuild}">
       <arg value="/p:Configuration=${BuildConfiguration}" />
       <arg value="/t:Package" />
-      <arg value="/p:VisualStudioVersion=12.0"/>
-    </msbuild>
+      <arg value="CIDemo.Web\CIDemo.Web.csproj" />
+    </exec>
 
     <copy todir="deploy" overwrite="true">
       <fileset basedir="CIDemo.Web\obj\Release\Package">
@@ -136,15 +137,11 @@
   
   <!-- Deploy to the dev environment -->
   <target name="deployDev">
-    <property name="deploy.sourcePath" value="\\cidemoserver\c$\build\CIDemo\package" />
-    <property name="deploy.targetPath" value="\\cidemoserver\c$\sandbox\CIDemo"/>
-
-    <msbuild project="CIDemo.Web\CIDemo.Web.csproj">
+	<exec program="${MSBuild}">
       <arg value="/p:DeployOnBuild=true" />
       <arg value="/p:PublishProfile=DEV" />
-      <arg value="/p:VisualStudioVersion=12.0"/>
-    </msbuild>
-    
+      <arg value="CIDemo.Web\CIDemo.Web.csproj" />
+    </exec>
   </target>
 
 </project>
