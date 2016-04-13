@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -168,14 +169,6 @@
       <Project>{5ab059a4-7b81-46b3-b1fa-fd27a7025025}</Project>
       <Name>CIDemo.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CIDemo.Common\CIDemo.Common.csproj">
-      <Project>{8d4c5d9f-aba5-4af2-a410-55c67a954b99}</Project>
-      <Name>CIDemo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CIDemo.Entities\CIDemo.Entities.csproj">
-      <Project>{a36efae9-8cae-4330-8fd0-6e5b153b8157}</Project>
-      <Name>CIDemo.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -188,7 +181,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>16552</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

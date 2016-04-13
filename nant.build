@@ -79,7 +79,6 @@
       <in>
         <items>
           <include name="*.Tests" />
-          <exclude name="*.Web.Automation.Tests" />
         </items>
       </in>
       <do>
