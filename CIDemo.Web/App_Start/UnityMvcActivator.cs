@@ -25,7 +25,7 @@ namespace CIDemo.Web.App_Start
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
             // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
 
-            container.RegisterType<IFibonacciCalculator, FibonacciCalculator>();
+            container.RegisterType<IFibonacciCalculator, FastFibonacciCalculator>();
         }
 
         /// <summary>Disposes the Unity container when the application is shut down.</summary>

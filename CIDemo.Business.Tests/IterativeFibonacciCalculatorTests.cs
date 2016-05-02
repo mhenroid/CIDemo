@@ -6,14 +6,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CIDemo.Business.Tests
 {
     [TestClass]
-    public class FibonacciCalculatorTests
+    public class IterativeFibonacciCalculatorTests
     {
         private IFibonacciCalculator target;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            target = new FibonacciCalculator();
+            target = new IterativeFibonacciCalculator();
         }
 
         [TestMethod]
